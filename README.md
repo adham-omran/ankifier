@@ -1,17 +1,17 @@
 
 # Table of Contents
 
-1.  [Screencast](#orgd04471a)
-2.  [Installation](#orgd0c9e9a)
-    1.  [Manual](#org3fa5d99)
-3.  [Usage](#orgb4a4d0b)
-    1.  [Examples](#orgc7aba0d)
-    2.  [Tips](#orgfd17259)
-4.  [Changelog](#org727de58)
-    1.  [1.0.0](#orgeb96103)
-5.  [Credits](#orgf7a5699)
-6.  [Development](#orgfec962a)
-7.  [License](#orgebc594f)
+1.  [Screencast](#org3131ee2)
+2.  [Installation](#org9f86f0b)
+    1.  [Manual](#org71a0fba)
+3.  [Usage](#org0115530)
+    1.  [Examples](#orgcd9cc31)
+    2.  [Tips](#org2bc7fdd)
+4.  [Changelog](#org7133710)
+    1.  [1.0.0](#orgd39b5d1)
+5.  [Credits](#org017fcad)
+6.  [Development](#org6169f4a)
+7.  [License](#orgb77e085)
 
 Efficiently create Anki flashcards from your notes.
 
@@ -21,19 +21,19 @@ utilizing the fantastic text editing of Emacs.
 I mostly use it inside [org-noter](https://github.com/weirdNox/org-noter).
 
 
-<a id="orgd04471a"></a>
+<a id="org3131ee2"></a>
 
 # Screencast
 
 [Basic flashcard](screencasts/ankifier-basic.mp4)
 
 
-<a id="orgd0c9e9a"></a>
+<a id="org9f86f0b"></a>
 
 # Installation
 
 
-<a id="org3fa5d99"></a>
+<a id="org71a0fba"></a>
 
 ## Manual
 
@@ -48,7 +48,7 @@ Then put this file in your load-path, and put this in your init file:
     (require 'ankifier)
 
 
-<a id="orgb4a4d0b"></a>
+<a id="org0115530"></a>
 
 # Usage
 
@@ -68,20 +68,18 @@ and have a single question mark to indicate the *Question* part and the *Answer*
 part.
 
 
-<a id="orgc7aba0d"></a>
+<a id="orgcd9cc31"></a>
 
 ## Examples
 
 What is Emacs?
-
 An extensible, customizable, free/libre text editor — and more.
 
 When was Emacs 27.2 released?
-
 Mar 25, 2021
 
 
-<a id="orgfd17259"></a>
+<a id="org2bc7fdd"></a>
 
 ## Tips
 
@@ -91,19 +89,19 @@ Mar 25, 2021
     properly.
 
 
-<a id="org727de58"></a>
+<a id="org7133710"></a>
 
 # Changelog
 
 
-<a id="orgeb96103"></a>
+<a id="orgd39b5d1"></a>
 
 ## 1.0.0
 
 Initial release.
 
 
-<a id="orgf7a5699"></a>
+<a id="org017fcad"></a>
 
 # Credits
 
@@ -111,7 +109,7 @@ Initial release.
     [anki-editor](https://github.com/louietan/anki-editor), which allows the flash cards to be sent to Anki in the first place.
 
 
-<a id="orgfec962a"></a>
+<a id="org6169f4a"></a>
 
 # Development
 
@@ -119,7 +117,7 @@ Bug reports, feature requests, suggestions are all welcome, keep in mind this is
 my first Emacs package!
 
 
-<a id="orgebc594f"></a>
+<a id="orgb77e085"></a>
 
 # License
 
