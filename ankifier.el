@@ -133,7 +133,7 @@ into a special header whose name is determined by `ankifier-cards-heading'"
     (ankifier--create-basic-question)))
 
 (defun ankifier-create-cloze-from-region ()
-    "Insert a set of questions from the selected region.
+    "Insert a set of clozes from the selected region.
 1. `ankifier--split-region-cloze' creates the list of questions.
 2. Check if `ankifier-insert-elsewhere' is t or nil.
 3. Go to * `ankifier-cards-heading' or create it the go to it."
