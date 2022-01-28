@@ -40,8 +40,9 @@ I mostly use it inside [org-noter](https://github.com/weirdNox/org-noter).
 Install these packages:
 
 -   `anki-editor`
+
     While not *required*, this is the package that allows the output of my package
-    to be sent to Anki (utilizing the [AnkiConnect](https://ankiweb.net/shared/info/2055492159) addon.)
+    to be sent to Anki (utilizing the [AnkiConnect](https://ankiweb.net/shared/info/2055492159) addon).
 
 Then put this file in your load-path, and put this in your init file:
 
@@ -76,7 +77,7 @@ What is Emacs?
 An extensible, customizable, free/libre text editor — and more.
 
 When was Emacs 27.2 released?
-Mar 25, 2021
+Mar 25, 2021.
 
 
 <a id="org2bc7fdd"></a>
@@ -120,6 +121,6 @@ my first Emacs package!
 <a id="orgb77e085"></a>
 
 # License
-
+GPL V3
 Check [LICENSE](LICENSE)
 
