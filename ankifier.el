@@ -151,7 +151,6 @@ into a special header whose name is determined by `ankifier-cards-heading'"
 
 (defun ankifier--split-region-basic ()
   "Split REGION into paragraphs seperated by \\n\\n."
-  (interactive)
   (let (
         (region-text (buffer-substring-no-properties (region-beginning) (region-end))))
     (setq ankifier--basic-region-results (split-string region-text "\n\n")))
@@ -160,7 +159,6 @@ into a special header whose name is determined by `ankifier-cards-heading'"
 (defun ankifier--split-region-cloze ()
   "Split REGION into paragraphs seperated by \\n\\n.
 The results are stored in `ankifier--cloze-region-results'"
-  (interactive)
   (let (
         (region-text (buffer-substring-no-properties (region-beginning) (region-end))))
     (setq ankifier--cloze-region-results (split-string region-text "\n\n")))
@@ -170,7 +168,6 @@ The results are stored in `ankifier--cloze-region-results'"
   "Split `ankifier--cloze-region-results' then insert card.
 Splits the list of strings created by `ankifier--split-region-cloze' and
 passes them to `ankifier--cloze-template' as parameters."
-  (interactive)
   (cl-loop for item in ankifier--cloze-region-results
            do
            (let (
@@ -230,7 +227,6 @@ passes them to `ankifier--basic-template' as parameters."
 ;;; Go to pre-named heading
 (defun ankifier--go-to-heading ()
   "Go to `ankifier-cards-heading'."
-  (interactive)
   (goto-char (point-min))
   (search-forward (concat "* " ankifier-cards-heading) nil t))
 
