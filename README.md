@@ -1,39 +1,34 @@
 
 # Table of Contents
 
-1.  [Screenshots](#orgf83c509)
-    1.  [Gif](#org77388de)
-2.  [Installation](#org2380571)
-    1.  [Manual](#org8ecda4d)
-3.  [Usage](#orgca38220)
-    1.  [Tips](#org0afdd73)
-4.  [Changelog](#org2c6d495)
-    1.  [1.0.0](#orgb88e1ca)
-5.  [Credits](#org2227b2d)
-6.  [Development](#org684303f)
-7.  [License](#orga4ddd9f)
+1.  [Screencast](#orga1d55a7)
+2.  [Installation](#org65c0c62)
+    1.  [Manual](#org05c8542)
+3.  [Usage](#org7b565c2)
+    1.  [Examples](#org1a8b50f)
+    2.  [Tips](#org8509162)
+4.  [Changelog](#org845f948)
+    1.  [1.0.0](#orga63e8eb)
+5.  [Credits](#orgbcd4042)
+6.  [Development](#org4c1de30)
+7.  [License](#org55456dd)
 
 This is my package.  It is nice.  You should try it.
 
 
-<a id="orgf83c509"></a>
+<a id="orga1d55a7"></a>
 
-# Screenshots
+# Screencast
 
-This gif shows how to use the basic ankifier.el functions.
-
-
-<a id="org77388de"></a>
-
-## TODO Gif
+[anki-basic.mp4](screencasts/ankifier-basic.mp4)
 
 
-<a id="org2380571"></a>
+<a id="org65c0c62"></a>
 
 # Installation
 
 
-<a id="org8ecda4d"></a>
+<a id="org05c8542"></a>
 
 ## Manual
 
@@ -46,44 +41,67 @@ Then put this file in your load-path, and put this in your init file:
     (require 'ankifier)
 
 
-<a id="orgca38220"></a>
+<a id="org7b565c2"></a>
 
 # Usage
 
-Run one of these commands:
+Run one of these commands on an active region:
 
--   `ankifier-create-basic-from-region`: Create Basic question(s) from active region.
--   `ankifier-create-cloze-from-region`: Create Cloze question(s) from active region.
+-   `ankifier-create-basic-from-region`: Create Basic question(s) from active
+    region.
+-   `ankifier-create-cloze-from-region`: Create Cloze question(s) from active
+    region.
+-   Set `ankifier-insert-elsewhere` to `t` if you want the questions to be created
+    under a `* Cards` org heading (This is what I mostly do).
+    The name of the heading can be edited using `ankifier-cards-heading`.
+
+Note that for a **basic** question, the questions must be separated by two newlines
+and have a single question mark to indicate the *Question* part and the *Answer*
+part.
 
 
-<a id="org0afdd73"></a>
+<a id="org1a8b50f"></a>
+
+## Examples
+
+What is Emacs?
+An extensible, customizable, free/libre text editor — and more.
+
+When was Emacs 27.2 released?
+Mar 25, 2021
+
+
+<a id="org8509162"></a>
 
 ## Tips
 
 -   You can customize settings in the `ankifier` group.
+-   Check out [Power up Anki with Emacs, Org mode, anki-editor and more](https://yiufung.net/post/anki-org/) for ideas
+    about general anki-editor use and how to get code highlighting working
+    properly.
 
 
-<a id="org2c6d495"></a>
+<a id="org845f948"></a>
 
 # Changelog
 
 
-<a id="orgb88e1ca"></a>
+<a id="orga63e8eb"></a>
 
 ## 1.0.0
 
 Initial release.
 
 
-<a id="org2227b2d"></a>
+<a id="orgbcd4042"></a>
 
 # Credits
 
-This package would not have been possible without the following packages:
-[anki-editor](https://github.com/louietan/anki-editor), which allows the flash cards to be sent to Anki in the first place.
+-   This package would not have been possible without the following packages:
+    [anki-editor](https://github.com/louietan/anki-editor), which allows the flash cards to be sent to Anki in the first place.
 
 
-<a id="org684303f"></a>
+<a id="org4c1de30"></a>
 
 # Development
 
@@ -91,7 +109,7 @@ Bug reports, feature requests, suggestions are all welcome, keep in mind this is
 my first Emacs package!
 
 
-<a id="orga4ddd9f"></a>
+<a id="org55456dd"></a>
 
 # License
 
