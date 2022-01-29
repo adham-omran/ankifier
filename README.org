@@ -23,7 +23,7 @@ I mostly use it inside [[https://github.com/weirdNox/org-noter][org-noter]].
   -  [[#installation][Installation]]
   -  [[#usage][Usage]]
   -  [[#changelog][Changelog]]
-  -  [[#acknowledgements][Acknowledgements]]
+  -  [[#acknowledgments][Acknowledgments]]
   -  [[#development][Development]]
 :END:
 
