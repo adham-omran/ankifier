@@ -55,22 +55,37 @@ Run one of these commands on an active region:
   region.
 + =ankifier-create-cloze-from-region=: Create Cloze question(s) from active
   region.
+
+Variables
+
 + Set =ankifier-insert-elsewhere= to =t= if you want the questions to be created
   under a =* Cards= org heading (This is what I mostly do).
 
   The name of the heading can be edited using =ankifier-cards-heading=.
 
++ =ankifier-anki-cloze-note-type= sets the card type for cloze cards.
 
-Note that for a *basic* question, the questions must be separated by two newlines
++ =ankifier-anki-basic-note-type= sets the card type for basic cards.
+
+
+For a *basic* question, the questions must be separated by two newlines
 and have a single question mark to indicate the /Question/ part and the /Answer/
 part.
 
+
+For a *cloze* question, the sentences must be separated by two new lines.
+
 ** Examples
+#+begin_src org
 What is Emacs?
 An extensible, customizable, free/libre text editor — and more.
 
 When was Emacs 27.2 released?
 Mar 25, 2021.
+
+Emacs is an {{c1::extensible}}, {{c2::customizable}}, free/libre {{c2::text
+editor::application type}} — and more.
+#+end_src
 ** Tips
 + You can customize settings in the =ankifier= group.
 + Check out [[https://yiufung.net/post/anki-org/][Power up Anki with Emacs, Org mode, anki-editor and more]] for ideas
