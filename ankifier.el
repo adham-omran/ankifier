@@ -68,7 +68,7 @@
 
 ;;;; Requirements
 
-(require 'anki-editor)
+;;; (require 'anki-editor)
 
 ;;;; Customization
 
