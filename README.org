@@ -13,7 +13,7 @@ I mostly use it inside [[https://github.com/weirdNox/org-noter][org-noter]].
 
 * Screencast
 
-[file:screencasts/ankifier-basic.gif]
+[[screencasts/ankifier-basic.gif]]
 
 * Contents                                                         :noexport:
 :PROPERTIES:
@@ -23,9 +23,8 @@ I mostly use it inside [[https://github.com/weirdNox/org-noter][org-noter]].
   -  [[#installation][Installation]]
   -  [[#usage][Usage]]
   -  [[#changelog][Changelog]]
-  -  [[#credits][Credits]]
+  -  [[#acknowledgements][Acknowledgements]]
   -  [[#development][Development]]
-  -  [[#license][License]]
 :END:
 
 * Installation
@@ -84,10 +83,15 @@ Mar 25, 2021.
 ** 1.0.0
 Initial release.
 * Acknowledgments
+:PROPERTIES:
+:TOC:      :depth 0
+:END:
 - This package would not have been possible without [[https://github.com/louietan/anki-editor][anki-editor]], which allows
   the flash cards to be sent to Anki in the first place.
 * Development
-
+:PROPERTIES:
+:TOC:      :depth 0
+:END:
 Bug reports, feature requests, suggestions are all welcome, keep in mind this is
 my first Emacs package!
 
