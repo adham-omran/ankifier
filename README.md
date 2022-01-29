@@ -1,17 +1,16 @@
 
 # Table of Contents
 
-1.  [Screencast](#org3131ee2)
-2.  [Installation](#org9f86f0b)
-    1.  [Manual](#org71a0fba)
-3.  [Usage](#org0115530)
-    1.  [Examples](#orgcd9cc31)
-    2.  [Tips](#org2bc7fdd)
-4.  [Changelog](#org7133710)
-    1.  [1.0.0](#orgd39b5d1)
-5.  [Credits](#org017fcad)
-6.  [Development](#org6169f4a)
-7.  [License](#orgb77e085)
+1.  [Screencast](#orgcfaa219)
+2.  [Installation](#org114e63f)
+    1.  [Manual](#org43efc4f)
+3.  [Usage](#orgd950bdf)
+    1.  [Examples](#org26a3734)
+    2.  [Tips](#org4515c0a)
+4.  [Changelog](#org3f613dd)
+    1.  [1.0.0](#org2446d53)
+5.  [Acknowledgments](#org6951c57)
+6.  [Development](#org58a14ee)
 
 Efficiently create Anki flashcards from your notes.
 
@@ -21,26 +20,25 @@ utilizing the fantastic text editing of Emacs.
 I mostly use it inside [org-noter](https://github.com/weirdNox/org-noter).
 
 
-<a id="org3131ee2"></a>
+<a id="orgcfaa219"></a>
 
 # Screencast
 
-[Basic flashcard](screencasts/ankifier-basic.mp4)
+[![img](screencasts/ankifier-basic.gif)]
 
 
-<a id="org9f86f0b"></a>
+<a id="org114e63f"></a>
 
 # Installation
 
 
-<a id="org71a0fba"></a>
+<a id="org43efc4f"></a>
 
 ## Manual
 
 Install these packages:
 
 -   `anki-editor`
-
     While not *required*, this is the package that allows the output of my package
     to be sent to Anki (utilizing the [AnkiConnect](https://ankiweb.net/shared/info/2055492159) addon).
 
@@ -49,7 +47,7 @@ Then put this file in your load-path, and put this in your init file:
     (require 'ankifier)
 
 
-<a id="org0115530"></a>
+<a id="orgd950bdf"></a>
 
 # Usage
 
@@ -69,7 +67,7 @@ and have a single question mark to indicate the *Question* part and the *Answer*
 part.
 
 
-<a id="orgcd9cc31"></a>
+<a id="org26a3734"></a>
 
 ## Examples
 
@@ -80,7 +78,7 @@ When was Emacs 27.2 released?
 Mar 25, 2021.
 
 
-<a id="org2bc7fdd"></a>
+<a id="org4515c0a"></a>
 
 ## Tips
 
@@ -90,37 +88,30 @@ Mar 25, 2021.
     properly.
 
 
-<a id="org7133710"></a>
+<a id="org3f613dd"></a>
 
 # Changelog
 
 
-<a id="orgd39b5d1"></a>
+<a id="org2446d53"></a>
 
 ## 1.0.0
 
 Initial release.
 
 
-<a id="org017fcad"></a>
+<a id="org6951c57"></a>
 
-# Credits
+# Acknowledgments
 
--   This package would not have been possible without the following packages:
-    [anki-editor](https://github.com/louietan/anki-editor), which allows the flash cards to be sent to Anki in the first place.
+-   This package would not have been possible without [anki-editor](https://github.com/louietan/anki-editor), which allows
+    the flash cards to be sent to Anki in the first place.
 
 
-<a id="org6169f4a"></a>
+<a id="org58a14ee"></a>
 
 # Development
 
 Bug reports, feature requests, suggestions are all welcome, keep in mind this is
 my first Emacs package!
-
-
-<a id="orgb77e085"></a>
-
-# License
-GPL V3
-Check [LICENSE](LICENSE)
 
