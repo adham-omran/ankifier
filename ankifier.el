@@ -148,9 +148,9 @@ else, create the cloze question in-place."
             (widen)
         (ankifier--elsewhere-check)
         (ankifier--go-to-heading)
-        (ankifier-insert-cloze))))
+        (ankifier--create-cloze))))
     (message "Inserting in place")
-    (ankifier-insert-cloze)))
+    (ankifier--create-cloze)))
 
 ;;;;; Private
 
@@ -169,7 +169,7 @@ The results are stored in `ankifier--cloze-region-results'"
     (setq ankifier--cloze-region-results (split-string region-text "\n\n")))
   (deactivate-mark))
 
-(defun ankifier-insert-cloze ()
+(defun ankifier--create-cloze ()
   "Split `ankifier--cloze-region-results' then insert card.
 Splits the list of strings created by `ankifier--split-region-cloze' and
 passes them to `ankifier--cloze-template' as parameters."
