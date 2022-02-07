@@ -143,9 +143,12 @@ else, create the cloze question in-place."
   (ankifier--split-region-cloze)
   (if ankifier-insert-elsewhere
       (progn
+        (save-excursion
+          (save-restriction
+            (widen)
         (ankifier--elsewhere-check)
         (ankifier--go-to-heading)
-        (ankifier-insert-cloze))
+        (ankifier-insert-cloze))))
     (message "Inserting in place")
     (ankifier-insert-cloze)))
 
