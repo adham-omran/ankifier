@@ -222,6 +222,10 @@ passes them to `ankifier--basic-template' as parameters."
   (org-insert-subheading 1)
   (insert "Front")
   ;; Insert question
+  ;; TODO Add an option to allow parseing of Context: Question?
+  ;; Will split question into (context, question), then instead of
+  ;; (insert "\n" question "?") it'll be
+  ;; (insert "\n" context "\n\n" question)
   (insert "\n" question "?")
   (org-insert-heading)
   (insert "Back")
