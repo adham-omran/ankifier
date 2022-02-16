@@ -103,6 +103,10 @@ into a special header whose name is determined by `ankifier-cards-heading'"
   "Heading name in case `ankifier-insert-elsewhere' is set to t."
   :type '(string))
 
+(defcustom ankifier--context-question nil
+  "If set to t, parse the template context:question and split it."
+  :type '(boolean))
+
 ;;;; Variables
 
 (defvar ankifier--cloze-region-results ()
@@ -226,7 +230,13 @@ passes them to `ankifier--basic-template' as parameters."
   ;; Will split question into (context, question), then instead of
   ;; (insert "\n" question "?") it'll be
   ;; (insert "\n" context "\n\n" question)
-  (insert "\n" question "?")
+  (if ankifier--context-question
+      ;; where the context split happens
+      ;; (split-string question ":")
+      (insert "\n" (car (split-string question ":"))
+              "\n\n"
+              (cadr (split-string question ":")) "?")
+    (insert "\n" question "?"))
   (org-insert-heading)
   (insert "Back")
   ;; Insert answer
