@@ -196,7 +196,15 @@ passes them to `ankifier--cloze-template' as parameters."
           ":END:")
   (org-insert-subheading nil)
   (insert "Text")
-  (insert "\n" cloze)
+  (condition-case nil
+      (if ankifier--context-question
+          ;; where the context split happens
+          ;; (split-string cloze ":")
+          (insert "\n" (car (split-string cloze ": "))
+                  "\n\n"
+                  (cadr (split-string cloze ": ")))
+        (insert "\n" cloze "?")
+    (error nil)))
   (org-insert-heading nil)
   (insert "Back Extra")
   (outline-up-heading 2))
