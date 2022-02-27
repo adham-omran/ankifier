@@ -67,6 +67,10 @@ Variables
 
 + =ankifier-anki-basic-note-type= sets the card type for basic cards.
 
++ Set =ankifier--context-question= if you want to use contextual questions, see
+  examples for uses.
+
+
 
 For a *basic* question, the questions must be separated by two newlines
 and have a single question mark to indicate the /Question/ part and the /Answer/
@@ -76,6 +80,7 @@ part.
 For a *cloze* question, the sentences must be separated by two new lines.
 
 ** Examples
+*** Normal Format
 #+begin_src org
 What is Emacs?
 An extensible, customizable, free/libre text editor — and more.
@@ -86,6 +91,17 @@ Mar 25, 2021.
 Emacs is an {{c1::extensible}}, {{c2::customizable}}, free/libre {{c2::text
 editor::application type}} — and more.
 #+end_src
+*** Contextual Question Format
+#+begin_src org
+Context: Question?
+Context: Cloze.
+
+Geography: What's the capital of France?
+Paris.
+
+Geography: {{c1::Paris}} is the capital of France.
+#+end_src
+This results in the ":" being replaced with two newline characters.
 ** Tips
 + You can customize settings in the =ankifier= group.
 + Check out [[https://yiufung.net/post/anki-org/][Power up Anki with Emacs, Org mode, anki-editor and more]] for ideas
@@ -95,8 +111,10 @@ editor::application type}} — and more.
 :PROPERTIES:
 :TOC:      :depth 0
 :END:
+** 1.1.0
+- Add the ability to format contextual questions.
 ** 1.0.0
-Initial release.
+- Initial release.
 * Acknowledgments
 :PROPERTIES:
 :TOC:      :depth 0
