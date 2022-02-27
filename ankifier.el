@@ -230,13 +230,15 @@ passes them to `ankifier--basic-template' as parameters."
   ;; Will split question into (context, question), then instead of
   ;; (insert "\n" question "?") it'll be
   ;; (insert "\n" context "\n\n" question)
-  (if ankifier--context-question
-      ;; where the context split happens
-      ;; (split-string question ":")
-      (insert "\n" (car (split-string question ":"))
-              "\n\n"
-              (cadr (split-string question ":")) "?")
-    (insert "\n" question "?"))
+  (condition-case nil
+      (if ankifier--context-question
+          ;; where the context split happens
+          ;; (split-string question ":")
+          (insert "\n" (car (split-string question ":"))
+                  "\n\n"
+                  (cadr (split-string question ":")) "?")
+        (insert "\n" question "?"))
+    (error nil))
   (org-insert-heading)
   (insert "Back")
   ;; Insert answer
