@@ -61,14 +61,14 @@ Variables
 + Set =ankifier-insert-elsewhere= to =t= if you want the questions to be created
   under a =* Cards= org heading (This is what I mostly do).
 
-  The name of the heading can be edited using =ankifier-cards-heading=.
+  The name of the heading can be modified through =ankifier-cards-heading=.
+
++ Set =ankifier--context-question= to =t= if you want to use contextual questions,
+  see examples for uses.
 
 + =ankifier-anki-cloze-note-type= sets the card type for cloze cards.
 
 + =ankifier-anki-basic-note-type= sets the card type for basic cards.
-
-+ Set =ankifier--context-question= if you want to use contextual questions, see
-  examples for uses.
 
 
 
