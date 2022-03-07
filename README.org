@@ -116,6 +116,8 @@ This results in the ":" being replaced with two newline characters.
 :PROPERTIES:
 :TOC:      :depth 0
 :END:
+** 1.2.0
+- Add the ability to include feedback for ankified notes.
 ** 1.1.0
 - Add the ability to format contextual questions.
 ** 1.0.0
