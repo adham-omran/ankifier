@@ -219,8 +219,8 @@ passes them to `ankifier--cloze-template' as parameters."
           (insert "\n" (car (split-string cloze ": "))
                   "\n\n"
                   (cadr (split-string cloze ": ")))
-        (insert "\n" cloze "?")
-    (error nil)))
+        (insert "\n" cloze "?"))
+    (wrong-type-argument (message "Warning: `ankifier-context-question' is `t' but the question does not follow the form \"Context: Cloze\"")))
   (org-insert-heading nil)
   (insert "Back Extra")
   (outline-up-heading 2))
@@ -259,7 +259,7 @@ passes them to `ankifier--basic-template' as parameters."
                   (cadr (split-string question ":")) "?")
         (insert "\n" question "?"))
     (wrong-type-argument
-     (message "Warning: ankifier-context-question is t but the question does not follow the form Context: Question? Answer")))
+     (message "Warning: `ankifier-context-question' is `t' but the question does not follow the form \"Context: Question? Answer\"")))
   ;; Insert the answer
   (org-insert-heading)
   (insert "Back" "\n" answer)
