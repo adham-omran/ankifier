@@ -258,11 +258,12 @@ passes them to `ankifier--basic-template' as parameters."
                   "\n\n"
                   (cadr (split-string question ":")) "?")
         (insert "\n" question "?"))
-    (error nil))
+    (wrong-type-argument
+     (message "Warning: ankifier-context-question is t but the question does not follow the form Context: Question? Answer")))
+  ;; Insert the answer
   (org-insert-heading)
-  (insert "Back")
+  (insert "Back" "\n" answer)
   ;; Insert answer
-  (insert "\n" answer)
   (outline-up-heading 2))
 
 ;;; Go to pre-named heading
