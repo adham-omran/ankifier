@@ -103,8 +103,12 @@ into a special header whose name is determined by `ankifier-cards-heading'"
   "Heading name in case `ankifier-insert-elsewhere' is set to t."
   :type '(string))
 
-(defcustom ankifier--context-question nil
+(defcustom ankifier-context-question nil
   "If set to t, parse the template context:question and split it."
+  :type '(boolean))
+
+(defcustom ankifier-feedback nil
+  "If set to t, insert ANKIFIED before the start of each question."
   :type '(boolean))
 
 ;;;; Variables
@@ -114,6 +118,12 @@ into a special header whose name is determined by `ankifier-cards-heading'"
 (defvar ankifier--basic-region-results ()
   "Variable to store region capture results.")
 
+;;;; Under work
+(defun ankifier--create-feedback-basic ()
+  "FEEDBACK FOR BASIC CARDS."
+  (cl-loop for item in ankifier--basic-region-results
+           do
+           (insert "ANKIFIED " item "\n\n")))
 ;;;; Functions
 
 ;;;;; Public
@@ -135,7 +145,11 @@ else, create the basic question in-place."
             (ankifier--go-to-heading)
             (ankifier--create-basic-question))))
     (message "Inserting in place")
-    (ankifier--create-basic-question)))
+    (ankifier--create-basic-question))
+  ; Feedback
+  (when ankifier-feedback
+    (save-excursion
+      (ankifier--create-feedback-basic))))
 
 (defun ankifier-create-cloze-from-region ()
     "Create a set of clozes from the selected region.
@@ -163,6 +177,8 @@ else, create the cloze question in-place."
   (let (
         (region-text (buffer-substring-no-properties (region-beginning) (region-end))))
     (setq ankifier--basic-region-results (split-string region-text "\n\n")))
+  (when ankifier-feedback
+    (kill-region nil nil t))
   (deactivate-mark))
 
 (defun ankifier--split-region-cloze ()
