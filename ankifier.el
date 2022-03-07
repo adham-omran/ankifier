@@ -213,7 +213,7 @@ passes them to `ankifier--cloze-template' as parameters."
   (org-insert-subheading nil)
   (insert "Text")
   (condition-case nil
-      (if ankifier--context-question
+      (if ankifier-context-question
           ;; where the context split happens
           ;; (split-string cloze ":")
           (insert "\n" (car (split-string cloze ": "))
@@ -248,17 +248,13 @@ passes them to `ankifier--basic-template' as parameters."
   ":ANKI_TAGS: " ankifier-anki-tags "\n"
   ":END: ")
   (org-insert-subheading 1)
-  (insert "Front")
+  (insert "Front\n")
   ;; Insert question
-  ;; TODO Add an option to allow parseing of Context: Question?
-  ;; Will split question into (context, question), then instead of
-  ;; (insert "\n" question "?") it'll be
-  ;; (insert "\n" context "\n\n" question)
   (condition-case nil
-      (if ankifier--context-question
+      (if ankifier-context-question
           ;; where the context split happens
           ;; (split-string question ":")
-          (insert "\n" (car (split-string question ":"))
+          (insert (car (split-string question ":"))
                   "\n\n"
                   (cadr (split-string question ":")) "?")
         (insert "\n" question "?"))
