@@ -123,7 +123,8 @@ into a special header whose name is determined by `ankifier-cards-heading'"
   "FEEDBACK FOR BASIC CARDS."
   (cl-loop for item in ankifier--basic-region-results
            do
-           (insert "ANKIFIED " item "\n\n")))
+           (insert "ANKIFIED " item "\n\n"))
+  (delete-char 2))
 ;;;; Functions
 
 ;;;;; Public
