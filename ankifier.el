@@ -125,6 +125,13 @@ into a special header whose name is determined by `ankifier-cards-heading'"
            do
            (insert "ANKIFIED " item "\n\n"))
   (delete-char 2))
+
+(defun ankifier--create-feedback-cloze ()
+  "FEEDBACK FOR BASIC CARDS."
+  (cl-loop for item in ankifier--cloze-region-results
+           do
+           (insert "ANKIFIED " item "\n\n"))
+  (delete-char 2))
 ;;;; Functions
 
 ;;;;; Public
@@ -169,7 +176,11 @@ else, create the cloze question in-place."
         (ankifier--go-to-heading)
         (ankifier--create-cloze))))
     (message "Inserting in place")
-    (ankifier--create-cloze)))
+    (ankifier--create-cloze))
+    ; Feedback
+  (when ankifier-feedback
+    (save-excursion
+      (ankifier--create-feedback-cloze))))
 
 ;;;;; Private
 
@@ -188,6 +199,8 @@ The results are stored in `ankifier--cloze-region-results'"
   (let (
         (region-text (buffer-substring-no-properties (region-beginning) (region-end))))
     (setq ankifier--cloze-region-results (split-string region-text "\n\n")))
+  (when ankifier-feedback
+    (kill-region nil nil t))
   (deactivate-mark))
 
 (defun ankifier--create-cloze ()
