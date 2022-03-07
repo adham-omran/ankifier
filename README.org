@@ -63,8 +63,13 @@ Variables
 
   The name of the heading can be modified through =ankifier-cards-heading=.
 
-+ Set =ankifier--context-question= to =t= if you want to use contextual questions,
++ Set =ankifier-context-question= to =t= if you want to use contextual questions,
   see examples for uses.
+
++ Set =ankifier-feedback= to =t= if you notes you ankify to have ANKIFIED at the
+  start of the text to indicate that this has been ankified. Useful when you
+  return to your notes after a while and wonder if you Ankified something or
+  not.
 
 + =ankifier-anki-cloze-note-type= sets the card type for cloze cards.
 
