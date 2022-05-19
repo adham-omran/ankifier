@@ -183,8 +183,26 @@ else, create the cloze question in-place."
       (ankifier--create-feedback-cloze))))
 
 (defun ankifier-find-to-be-ankified ()
-  "Find questions that haven't been ankified."
-  (interactive))
+  "Find questions that haven't been ankified.
+First search in the buffer for matching strings
+Second ask the user if they want to ankify.
+[a-z ]*:[a-z -]*\?"
+  ;; TODO How to deal with clozes?
+  ;; TODO Don't forward sentence when ankifying
+  ;; TODO Test limiting the regex search to the current subtree
+  ;;    that or avoid the * Cards subtree somehow
+  (interactive)
+  (while t
+  (re-search-forward "[a-z ]*:[a-z -]*\?")
+  (er/expand-region 2)
+  ;; ask to ankify
+  (let ((answer (read-string "ankify? (yes/no): ")))
+    (cond ((string= answer "y") (progn
+                                  (ankifier-create-from-region)
+                                  (message "Ankifying")))
+          ((string= answer "n") (message "Skipping"))))
+  ;; (org-forward-sentence)
+  (deactivate-mark)))
 
 ;;;;; Private
 
