@@ -117,6 +117,8 @@ into a special header whose name is determined by `ankifier-cards-heading'"
   "Variable to store region capture results.")
 (defvar ankifier--basic-region-results ()
   "Variable to store region capture results.")
+(defvar ankifier--all-region-results ()
+  "Variable to store region results from a split.")
 
 ;;;; Under work
 (defun ankifier--create-feedback-basic ()
@@ -215,6 +217,15 @@ else, create the cloze question in-place."
       (ankifier--create-feedback-cloze))))
 
 ;;;;; Private
+
+(defun ankifier--split-region-all ()
+  "Split REGION into paragraphs seperated by \\n\\n."
+  (let (
+        (region-text (buffer-substring-no-properties (region-beginning) (region-end))))
+    (setq ankifier--all-region-results (split-string region-text "\n\n")))
+  (when ankifier-feedback
+    (kill-region nil nil t))
+  (deactivate-mark))
 
 (defun ankifier--split-region-basic ()
   "Split REGION into paragraphs seperated by \\n\\n."
