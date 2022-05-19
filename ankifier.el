@@ -124,17 +124,49 @@ into a special header whose name is determined by `ankifier-cards-heading'"
   (cl-loop for item in ankifier--basic-region-results
            do
            (insert "ANKIFIED " item "\n\n"))
-  (delete-char 2))
+  (delete-char -2))
 
 (defun ankifier--create-feedback-cloze ()
-  "FEEDBACK FOR BASIC CARDS."
+  "FEEDBACK FOR CLOZE CARDS."
   (cl-loop for item in ankifier--cloze-region-results
            do
            (insert "ANKIFIED " item "\n\n"))
-  (delete-char 2))
+  (delete-char -2))
 ;;;; Functions
 
 ;;;;; Public
+(defun ankifier-create-from-region ()
+  "Parse active region into cloze and basic questions."
+  (interactive)
+  (setq ankifier--basic-region-results nil)
+  (setq ankifier--cloze-region-results nil)
+  ;; Create a list containing all questions.
+  (ankifier--split-region-all)
+  (cl-loop for item in ankifier--all-region-results
+           do
+           ;; If the question contains a {{ then it's a cloze question
+           ;; else treat it as a basic front/back question.
+           ;; Insert each type into its appropriate -results list
+           (if (string-match-p (regexp-quote "\{\{") item)
+               (push item ankifier--cloze-region-results)
+             (push item ankifier--basic-region-results)))
+                                        ; Insert questions
+  (if ankifier-insert-elsewhere
+      (progn
+        (save-excursion
+          (save-restriction
+            (widen)
+            (ankifier--elsewhere-check)
+            (ankifier--go-to-heading)
+            (ankifier--create-basic-question)
+            (ankifier--create-cloze))))
+    (ankifier--create-basic-question)
+    (ankifier--create-cloze))
+                                        ; Feedback functionality
+  (cl-loop for item in ankifier--all-region-results
+           do
+           (insert "ANKIFIED " item "\n\n"))
+  (delete-char -2))
 
 (defun ankifier-create-basic-from-region ()
   "Create a set of questions from the selected region.
