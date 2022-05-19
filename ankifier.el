@@ -182,6 +182,10 @@ else, create the cloze question in-place."
     (save-excursion
       (ankifier--create-feedback-cloze))))
 
+(defun ankifier-find-to-be-ankified ()
+  "Find questions that haven't been ankified."
+  (interactive))
+
 ;;;;; Private
 
 (defun ankifier--split-region-basic ()
