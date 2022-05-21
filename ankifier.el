@@ -191,18 +191,22 @@ Second ask the user if they want to ankify.
   ;; TODO Don't forward sentence when ankifying
   ;; TODO Test limiting the regex search to the current subtree
   ;;    that or avoid the * Cards subtree somehow
+  ;; TODO Case when no?
   (interactive)
   (while t
-  (re-search-forward "[a-z ]*:[a-z -]*\?")
+  (re-search-forward "[a-z ]*:[a-z -]*\?" nil nil)
   (er/expand-region 2)
   ;; ask to ankify
-  (let ((answer (read-string "ankify? (yes/no): ")))
-    (cond ((string= answer "y") (progn
-                                  (ankifier-create-from-region)
-                                  (message "Ankifying")))
-          ((string= answer "n") (message "Skipping"))))
-  ;; (org-forward-sentence)
-  (deactivate-mark)))
+  (let ((answer (read-char "ankify? (y/n): ")))
+    (cond ((char-equal answer 121) (ankifier-create-from-region))
+          ((char-equal answer 110) (forward-sentence))))
+    (deactivate-mark)))
+
+
+;; (message "%s" (read-string "are you gay? (y/n): "))
+;; (message "%s" (read-char "are you gay? (y/n): "))
+;; n -> "110"
+;; y ->  "121"
 
 ;;;;; Private
 
