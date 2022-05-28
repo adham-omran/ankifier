@@ -70,6 +70,9 @@
 
 ;;; (require 'anki-editor)
 
+(require 'org)
+(require 'cl-lib)
+
 ;;;; Customization
 
 (defgroup ankifier nil
