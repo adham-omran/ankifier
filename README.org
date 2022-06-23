@@ -9,8 +9,6 @@ Efficiently create Anki flashcards from your notes.
 I created this package to facilitate faster creation of Anki cards while I study
 utilizing the fantastic text editing of Emacs.
 
-I mostly use it inside [[https://github.com/weirdNox/org-noter][org-noter]].
-
 * Screencast
 
 [[screencasts/ankifier-basic.gif]]
