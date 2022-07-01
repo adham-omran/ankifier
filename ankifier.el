@@ -344,7 +344,9 @@ If it does not, it creates it on a top level."
 (defun ankifier--create-cards-heading ()
   "Create * `ankifier-cards-heading'."
   (save-excursion
-    (org-insert-heading nil nil t)
+    ;; (org-insert-heading nil nil t)
+    (goto-char (point-max))
+    (insert "\n* ")
     (insert ankifier-cards-heading)))
 
 ;;;; Footer
