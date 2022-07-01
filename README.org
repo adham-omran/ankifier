@@ -117,6 +117,15 @@ Paris.
 Geography: {{c1::Paris}} is the capital of France.
 #+end_src
 This results in the ":" being replaced with two newline characters.
+** Example Config
+This is the config I'm using at the moment.
+#+begin_src emacs-lisp
+(setq ankifier-insert-elsewhere t
+      ankifier-anki-basic-note-type "E-Basic"
+      ankifier-anki-cloze-note-type "E-Cloze"
+      ankifier-feedback t
+      ankifier-context-question t)
+#+end_src
 ** Tips
 + You can customize settings in the =ankifier= group.
 + Check out [[https://yiufung.net/post/anki-org/][Power up Anki with Emacs, Org mode, anki-editor and more]] for ideas
