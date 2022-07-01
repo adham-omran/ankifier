@@ -123,38 +123,24 @@ into a special header whose name is determined by `ankifier-cards-heading'"
 (defvar ankifier--all-region-results ()
   "Variable to store region results from a split.")
 
-;;;; Under work
-(defun ankifier--create-feedback-basic ()
-  "FEEDBACK FOR BASIC CARDS."
-  (cl-loop for item in ankifier--basic-region-results
-           do
-           (insert "ANKIFIED " item "\n\n"))
-  (delete-char -2))
-
-(defun ankifier--create-feedback-cloze ()
-  "FEEDBACK FOR CLOZE CARDS."
-  (cl-loop for item in ankifier--cloze-region-results
-           do
-           (insert "ANKIFIED " item "\n\n"))
-  (delete-char -2))
 ;;;; Functions
 
 ;;;;; Public
 (defun ankifier-create-from-region ()
   "Parse active region into cloze and basic questions."
   (interactive)
-  (setq ankifier--basic-region-results nil)
-  (setq ankifier--cloze-region-results nil)
+  (setq ankifier--basic-region-results nil
+        ankifier--cloze-region-results nil)
   ;; Create a list containing all questions.
   (ankifier--split-region-all)
-  (cl-loop for item in ankifier--all-region-results
-           do
-           ;; If the question contains a {{ then it's a cloze question
-           ;; else treat it as a basic front/back question.
-           ;; Insert each type into its appropriate -results list
-           (if (string-match-p (regexp-quote "\{\{") item)
-               (push item ankifier--cloze-region-results)
-             (push item ankifier--basic-region-results)))
+  ;; If the question contains a {{ then it's a cloze question
+  ;; else treat it as a basic front/back question.
+  ;; Insert each type into its appropriate -results list
+  (dolist (item ankifier--all-region-results)
+    (if (string-match-p (regexp-quote "\{\{c") item)
+        (push item ankifier--cloze-region-results)
+      (push item ankifier--basic-region-results)))
+
                                         ; Insert questions
   (if ankifier-insert-elsewhere
       (progn
@@ -168,9 +154,8 @@ into a special header whose name is determined by `ankifier-cards-heading'"
     (ankifier--create-basic-question)
     (ankifier--create-cloze))
                                         ; Feedback functionality
-  (cl-loop for item in ankifier--all-region-results
-           do
-           (insert "ANKIFIED " item "\n\n"))
+  (dolist (item ankifier--all-region-results)
+    (insert "ANKIFIED " item "\n\n"))
   (delete-char -2))
 
 (defun ankifier-create-basic-from-region ()
@@ -221,6 +206,18 @@ else, create the cloze question in-place."
 
 ;;;;; Private
 
+(defun ankifier--create-feedback-basic ()
+  "Feedback for basic cards."
+  (dolist (item ankifier--basic-region-results)
+    (insert "ANKIFIED " item "\n\n"))
+  (delete-char -2))
+
+(defun ankifier--create-feedback-cloze ()
+  "FEEDBACK FOR CLOZE CARDS."
+  (dolist (item ankifier--cloze-region-results)
+    (insert "ANKIFIED " item "\n\n"))
+  (delete-char -2))
+
 (defun ankifier--split-region-all ()
   "Split REGION into paragraphs seperated by \\n\\n."
   (let (
@@ -253,11 +250,10 @@ The results are stored in `ankifier--cloze-region-results'"
   "Split `ankifier--cloze-region-results' then insert card.
 Splits the list of strings created by `ankifier--split-region-cloze' and
 passes them to `ankifier--cloze-template' as parameters."
-  (cl-loop for item in ankifier--cloze-region-results
-           do
-           (let (
-                 (cloze item))
-             (ankifier--cloze-template cloze))))
+  (dolist (item ankifier--cloze-region-results)
+    (let (
+          (cloze item))
+      (ankifier--cloze-template cloze))))
 
 (defun ankifier--cloze-template (cloze)
   "Insert CLOZE into the anki-editor template."
@@ -290,12 +286,11 @@ passes them to `ankifier--cloze-template' as parameters."
   "Split `ankifier--basic-region-results' then create card.
 Splits the list of strings created by `ankifier--split-region-basic' and
 passes them to `ankifier--basic-template' as parameters."
-  (cl-loop for item in ankifier--basic-region-results
-           do
-           (let (
-                 (question (car (split-string item "\?")))
-                 (answer (cadr (split-string item "\?"))))
-             (ankifier--basic-template question answer))))
+  (dolist (item ankifier--basic-region-results)
+    (let (
+          (question (car (split-string item "\?")))
+          (answer (cadr (split-string item "\?"))))
+      (ankifier--basic-template question answer))))
 
 (defun ankifier--basic-template (question answer)
   "Insert QUESTION and ANSWER into the anki-editor template."
