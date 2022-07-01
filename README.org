@@ -20,7 +20,9 @@ utilizing the fantastic text editing of Emacs.
 :CONTENTS:
 - [[#installation][Installation]]
 - [[#usage][Usage]]
-- [[#changelog][Changelog]]
+- [[#development][Development]]
+  - [[#changelog][Changelog]]
+  - [[#whats-next][What's Next?]]
 - [[#acknowledgments][Acknowledgments]]
 - [[#development][Development]]
 :END:
@@ -131,24 +133,23 @@ This is the config I'm using at the moment.
 + Check out [[https://yiufung.net/post/anki-org/][Power up Anki with Emacs, Org mode, anki-editor and more]] for ideas
   about general anki-editor use and how to get code highlighting working
   properly.
-* Changelog
+* Development
+** Changelog
 :PROPERTIES:
 :TOC:      :depth 0
 :END:
-** 1.3.0
-- Add the function ~ankifier-create-from-region~.
-** 1.2.0
-- Add the ability to include feedback for ankified notes.
-** 1.1.0
-- Add the ability to format contextual questions.
-** 1.0.0
-- Initial release.
+- 1.3.0: Add the function ~ankifier-create-from-region~.
+- 1.2.0: Add the ability to include feedback for ankified notes.
+- 1.1.0: Add the ability to format contextual questions.
+- 1.0.0: Initial release.
+** What's Next?
+- [ ] Remove dependency on ~cl-lib~.
 * Acknowledgments
 :PROPERTIES:
 :TOC:      :depth 0
 :END:
-- This package would not have been possible without [[https://github.com/louietan/anki-editor][anki-editor]], which allows
-  the flash cards to be sent to Anki in the first place.
+This package would not have been possible without [[https://github.com/louietan/anki-editor][anki-editor]], which allows the
+flash cards to be sent to Anki in the first place.
 * Development
 :PROPERTIES:
 :TOC:      :depth 0
