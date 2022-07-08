@@ -31,8 +31,11 @@ utilizing the fantastic text editing of Emacs.
 :PROPERTIES:
 :TOC:      :depth 0
 :END:
+Dependencies:
++ ~expand-region.el~ ([[https://github.com/magnars/expand-region.el][link]]).
+
 Recommended package:
-+ =anki-editor=
++ ~anki-editor~
   While not /required/, this is the ~anki-editor~ package that allows the output of my package
   to be sent to Anki (utilizing the [[https://ankiweb.net/shared/info/2055492159][AnkiConnect]] addon).
 
@@ -139,7 +142,7 @@ This is the config I'm using at the moment.
 - 1.1.0: Add the ability to format contextual questions.
 - 1.0.0: Initial release.
 ** What's Next?
-- [ ] Remove dependency on ~cl-lib~.
+- [ ] Refactor (er/expand-region 2) into vanilla Elisp.
 * Acknowledgments
 :PROPERTIES:
 :TOC:      :depth 0
