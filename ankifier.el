@@ -71,6 +71,7 @@
 ;;; (require 'anki-editor)
 
 (require 'org)
+(require 'expand-region)
 
 ;;;; Customization
 
