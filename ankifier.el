@@ -5,7 +5,7 @@
 ;; Author: Adham Omran <adham.rasoul@gmail.com>
 ;; Maintainer: Adham Omran <adham.rasoul@gmail.com>
 ;; Created: December 30, 2021
-;; Version: 1.3.1
+;; Version: 1.4.0
 ;; Homepage: https://github.com/adham-omran/ankifier
 ;; Package-Requires: ((emacs "27.2"))
 ;; Keywords: convenience
@@ -71,7 +71,6 @@
 ;;; (require 'anki-editor)
 
 (require 'org)
-(require 'cl-lib)
 
 ;;;; Customization
 
