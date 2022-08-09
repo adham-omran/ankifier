@@ -29,7 +29,7 @@
 
 ;;  Efficiently create Anki flashcards from your notes
 
-;;  This package extendsd anki-editor.el by Lei Tan, allowing notes written
+;;  This package extended anki-editor.el by Lei Tan, allowing notes written
 ;;  in a special format to be converted into Basic and Cloze questions
 
 ;;;; Installation
