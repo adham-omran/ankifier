@@ -225,11 +225,6 @@ Second ask the user if they want to ankify.
     (deactivate-mark)))
 
 
-;; (message "%s" (read-string "are you gay? (y/n): "))
-;; (message "%s" (read-char "are you gay? (y/n): "))
-;; n -> "110"
-;; y ->  "121"
-
 ;;;;; Private
 
 (defun ankifier--create-feedback-basic ()
