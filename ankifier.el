@@ -176,13 +176,13 @@ else, create the basic question in-place."
             (ankifier--create-basic-question))))
     (message "Inserting in place")
     (ankifier--create-basic-question))
-  ; Feedback
+					; Feedback
   (when ankifier-feedback
     (save-excursion
       (ankifier--create-feedback-basic))))
 
 (defun ankifier-create-cloze-from-region ()
-    "Create a set of clozes from the selected region.
+  "Create a set of clozes from the selected region.
 1. `ankifier--split-region-cloze' creates the list of questions.
 2. Check if `ankifier-insert-elsewhere' is t or nil.
 If t, go to * `ankifier-cards-heading' or create it then go to it
@@ -194,12 +194,12 @@ else, create the cloze question in-place."
         (save-excursion
           (save-restriction
             (widen)
-        (ankifier--elsewhere-check)
-        (ankifier--go-to-heading)
-        (ankifier--create-cloze))))
+            (ankifier--elsewhere-check)
+            (ankifier--go-to-heading)
+            (ankifier--create-cloze))))
     (message "Inserting in place")
     (ankifier--create-cloze))
-    ; Feedback
+					; Feedback
   (when ankifier-feedback
     (save-excursion
       (ankifier--create-feedback-cloze))))
@@ -216,12 +216,12 @@ Second ask the user if they want to ankify.
   ;; TODO Case when no?
   (interactive)
   (while t
-  (re-search-forward "[a-z ]*:[a-z -]*\?" nil nil)
-  (er/expand-region 2)
-  ;; ask to ankify
-  (let ((answer (read-char "ankify? (y/n): ")))
-    (cond ((char-equal answer 121) (ankifier-create-from-region))
-          ((char-equal answer 110) (forward-sentence))))
+    (re-search-forward "[a-z ]*:[a-z -]*\?" nil nil)
+    (er/expand-region 2)
+    ;; ask to ankify
+    (let ((answer (read-char "ankify? (y/n): ")))
+      (cond ((char-equal answer 121) (ankifier-create-from-region))
+            ((char-equal answer 110) (forward-sentence))))
     (deactivate-mark)))
 
 
@@ -280,7 +280,7 @@ passes them to `ankifier--cloze-template' as parameters."
   "Insert CLOZE into the anki-editor template."
   (org-insert-subheading nil)
   (insert "Cloze")
-  ; Insert properties
+					; Insert properties
   (insert "\n"
           ":PROPERTIES:\n"
           ":ANKI_DECK: " ankifier-anki-deck "\n"
@@ -318,11 +318,11 @@ passes them to `ankifier--basic-template' as parameters."
   (org-insert-subheading nil)
   (insert "Basic")
   (insert "\n"
-  ":PROPERTIES:\n"
-  ":ANKI_DECK: " ankifier-anki-deck "\n"
-  ":ANKI_NOTE_TYPE: " ankifier-anki-basic-note-type "\n"
-  ":ANKI_TAGS: " ankifier-anki-tags "\n"
-  ":END: ")
+	  ":PROPERTIES:\n"
+	  ":ANKI_DECK: " ankifier-anki-deck "\n"
+	  ":ANKI_NOTE_TYPE: " ankifier-anki-basic-note-type "\n"
+	  ":ANKI_TAGS: " ankifier-anki-tags "\n"
+	  ":END: ")
   (org-insert-subheading 1)
   (insert "Front\n")
   ;; Insert question
@@ -354,7 +354,7 @@ If it does not, it creates it on a top level."
   (unless (save-excursion
             (goto-char (point-min))
             (search-forward (concat "* " ankifier-cards-heading) nil t))
-    ; Code that runs when no heading exists
+					; Code that runs when no heading exists
     (ankifier--create-cards-heading)))
 
 (defun ankifier--create-cards-heading ()
