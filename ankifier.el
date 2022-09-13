@@ -300,7 +300,8 @@ passes them to `ankifier--cloze-template' as parameters."
     (wrong-type-argument (message "Warning: `ankifier-context-question' is `t' but the question does not follow the form \"Context: Cloze\"")))
   (org-insert-heading nil)
   (insert "Back Extra")
-  (outline-up-heading 2))
+  (outline-up-heading 2)
+  (org-end-of-line))
 
 ;;; Basic Card creation
 (defun ankifier--create-basic-question ()
@@ -340,7 +341,8 @@ passes them to `ankifier--basic-template' as parameters."
   (org-insert-heading)
   (insert "Back" "\n" answer)
   ;; Insert answer
-  (outline-up-heading 2))
+  (outline-up-heading 2)
+  (org-end-of-line))
 
 ;;; Go to pre-named heading
 (defun ankifier--go-to-heading ()
