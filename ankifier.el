@@ -123,6 +123,9 @@ into a special header whose name is determined by `ankifier-cards-heading'"
 (defvar ankifier--all-region-results ()
   "Variable to store region results from a split.")
 
+(defvar ankifier--fail nil
+  "Variable to determine if there are basic or cloze questions.")
+
 ;;;; Functions
 
 ;;;;; Public
@@ -130,33 +133,39 @@ into a special header whose name is determined by `ankifier-cards-heading'"
   "Parse active region into cloze and basic questions."
   (interactive)
   (setq ankifier--basic-region-results nil
-        ankifier--cloze-region-results nil)
-  ;; Create a list containing all questions.
-  (ankifier--split-region-all)
-  ;; If the question contains a {{ then it's a cloze question
-  ;; else treat it as a basic front/back question.
-  ;; Insert each type into its appropriate -results list
-  (dolist (item ankifier--all-region-results)
-    (if (string-match-p (regexp-quote "\{\{c") item)
-        (push item ankifier--cloze-region-results)
-      (push item ankifier--basic-region-results)))
+        ankifier--cloze-region-results nil
+	ankifier--fail nil)
+  ;; Check if there are questions to begin with
+  (ankifier--test-region)
+  (if ankifier--fail
+      (message "One or more paragraphs is malformed.")
+    
+    ;; Create a list containing all questions.
+    (ankifier--split-region-all)
+    ;; If the question contains a {{ then it's a cloze question
+    ;; else treat it as a basic front/back question.
+    ;; Insert each type into its appropriate -results list
+    (dolist (item ankifier--all-region-results)
+      (if (string-match-p (regexp-quote "\{\{c") item)
+          (push item ankifier--cloze-region-results)
+	(push item ankifier--basic-region-results)))
 
                                         ; Insert questions
-  (if ankifier-insert-elsewhere
-      (progn
-        (save-excursion
-          (save-restriction
-            (widen)
-            (ankifier--elsewhere-check)
-            (ankifier--go-to-heading)
-            (ankifier--create-basic-question)
-            (ankifier--create-cloze))))
-    (ankifier--create-basic-question)
-    (ankifier--create-cloze))
+    (if ankifier-insert-elsewhere
+	(progn
+          (save-excursion
+            (save-restriction
+              (widen)
+              (ankifier--elsewhere-check)
+              (ankifier--go-to-heading)
+              (ankifier--create-basic-question)
+              (ankifier--create-cloze))))
+      (ankifier--create-basic-question)
+      (ankifier--create-cloze))
                                         ; Feedback functionality
-  (dolist (item ankifier--all-region-results)
-    (insert "ANKIFIED " item "\n\n"))
-  (delete-char -2))
+    (dolist (item ankifier--all-region-results)
+      (insert "ANKIFIED " item "\n\n"))
+    (delete-char -2)))
 
 (defun ankifier-create-basic-from-region ()
   "Create a set of questions from the selected region.
@@ -226,6 +235,21 @@ Second ask the user if they want to ankify.
 
 
 ;;;;; Private
+
+(defun ankifier--test-region ()
+  "Split REGION into paragraphs seperated by \\n\\n.
+
+Test if there's a cloze or basic question."
+  (interactive)
+  (let (
+        (region-text
+	 (buffer-substring-no-properties (region-beginning) (region-end))))
+    (let ((split-results (split-string region-text "\n\n"))) ; TODO optimize
+      (dolist (item split-results)
+	(cond ((string-match-p (regexp-quote "\{\{c") item) nil)
+	      ((string-match "\? .*" item) nil)
+	      (t (setq ankifier--fail t)))
+	))))
 
 (defun ankifier--create-feedback-basic ()
   "Feedback for basic cards."
