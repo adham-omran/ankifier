@@ -114,6 +114,9 @@ into a special header whose name is determined by `ankifier-cards-heading'"
   "If set to t, insert ANKIFIED before the start of each question."
   :type '(boolean))
 
+(defcustom ankifier-arabic nil
+  "If set to t, insert basic questions with ؟ instead of ?.")
+
 ;;;; Variables
 
 (defvar ankifier--cloze-region-results ()
@@ -247,7 +250,7 @@ Test if there's a cloze or basic question."
     (let ((split-results (split-string region-text "\n\n"))) ; TODO optimize
       (dolist (item split-results)
 	(cond ((string-match-p (regexp-quote "\{\{c") item) nil)
-	      ((string-match "\? .*" item) nil)
+	      ((string-match "[\?؟] .*" item) nil)
 	      (t (setq ankifier--fail t)))
 	))))
 
@@ -334,8 +337,8 @@ Splits the list of strings created by `ankifier--split-region-basic' and
 passes them to `ankifier--basic-template' as parameters."
   (dolist (item ankifier--basic-region-results)
     (let (
-          (question (car (split-string item "\?")))
-          (answer (cadr (split-string item "\?"))))
+          (question (car (split-string item "[\?؟]")))
+          (answer (cadr (split-string item "[\?؟]"))))
       (ankifier--basic-template question answer))))
 
 (defun ankifier--basic-template (question answer)
@@ -357,8 +360,12 @@ passes them to `ankifier--basic-template' as parameters."
           ;; (split-string question ":")
           (insert (car (split-string question ":"))
                   "\n\n"
-                  (cadr (split-string question ":")) "?")
-        (insert "\n" question "?"))
+                  (cadr (split-string question ":"))
+		  (if ankifier-arabic "؟"
+		    "?"))
+        (insert "\n" question)
+	(if ankifier-arabic (insert "؟")
+	  (insert "?")))
     (wrong-type-argument
      (message "Warning: `ankifier-context-question' is `t' but the question does not follow the form \"Context: Question? Answer\"")))
   ;; Insert the answer
