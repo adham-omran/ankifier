@@ -250,7 +250,7 @@ Test if there's a cloze or basic question."
     (let ((split-results (split-string region-text "\n\n"))) ; TODO optimize
       (dolist (item split-results)
 	(cond ((string-match-p (regexp-quote "\{\{c") item) nil)
-	      ((string-match "[\?؟] .*" item) nil)
+	      ((string-match "[\?؟]\n?.*" item) nil)
 	      (t (setq ankifier--fail t)))
 	))))
 
