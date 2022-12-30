@@ -358,11 +358,14 @@ passes them to `ankifier--basic-template' as parameters."
       (if ankifier-context-question
           ;; where the context split happens
           ;; (split-string question ":")
-          (insert (car (split-string question ":"))
-                  "\n\n"
-                  (cadr (split-string question ":"))
-		  (if ankifier-arabic "؟"
-		    "?"))
+          (insert
+	   (car (split-string question ":"))  ;; The question's context
+           "\n\n"                             ;; Line break to have the context
+	                                      ;; display proper
+           (cadr (split-string question ":")) ;; The question body
+	   (if ankifier-arabic "؟"            ;; Whether or not the question
+	                                      ;; mark is Arabic
+	     "?"))
         (insert "\n" question)
 	(if ankifier-arabic (insert "؟")
 	  (insert "?")))
