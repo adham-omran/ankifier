@@ -137,13 +137,13 @@ into a special header whose name is determined by `ankifier-cards-heading'"
   "Parse active region into cloze and basic questions."
   (interactive)
   (setq ankifier--basic-region-results nil
-        ankifier--cloze-region-results nil
+	ankifier--cloze-region-results nil
 	ankifier--fail nil)
   ;; Check if there are questions to begin with
   (ankifier--test-region)
   (if ankifier--fail
       (message "One or more paragraphs is malformed.")
-    
+
     ;; Create a list containing all questions.
     (ankifier--split-region-all)
     ;; If the question contains a {{ then it's a cloze question
@@ -151,22 +151,22 @@ into a special header whose name is determined by `ankifier-cards-heading'"
     ;; Insert each type into its appropriate -results list
     (dolist (item ankifier--all-region-results)
       (if (string-match-p (regexp-quote "\{\{c") item)
-          (push item ankifier--cloze-region-results)
+	  (push item ankifier--cloze-region-results)
 	(push item ankifier--basic-region-results)))
 
-                                        ; Insert questions
+					; Insert questions
     (if ankifier-insert-elsewhere
 	(progn
-          (save-excursion
-            (save-restriction
-              (widen)
-              (ankifier--elsewhere-check)
-              (ankifier--go-to-heading)
-              (ankifier--create-basic-question)
-              (ankifier--create-cloze))))
+	  (save-excursion
+	    (save-restriction
+	      (widen)
+	      (ankifier--elsewhere-check)
+	      (ankifier--go-to-heading)
+	      (ankifier--create-basic-question)
+	      (ankifier--create-cloze))))
       (ankifier--create-basic-question)
       (ankifier--create-cloze))
-                                        ; Feedback functionality
+					; Feedback functionality
     (dolist (item ankifier--all-region-results)
       (insert "ANKIFIED " item "\n\n"))
     (delete-char -2)))
@@ -181,12 +181,12 @@ else, create the basic question in-place."
   (ankifier--split-region-basic)
   (if ankifier-insert-elsewhere
       (progn
-        (save-excursion
-          (save-restriction
-            (widen)
-            (ankifier--elsewhere-check)
-            (ankifier--go-to-heading)
-            (ankifier--create-basic-question))))
+	(save-excursion
+	  (save-restriction
+	    (widen)
+	    (ankifier--elsewhere-check)
+	    (ankifier--go-to-heading)
+	    (ankifier--create-basic-question))))
     (message "Inserting in place")
     (ankifier--create-basic-question))
 					; Feedback
@@ -204,12 +204,12 @@ else, create the cloze question in-place."
   (ankifier--split-region-cloze)
   (if ankifier-insert-elsewhere
       (progn
-        (save-excursion
-          (save-restriction
-            (widen)
-            (ankifier--elsewhere-check)
-            (ankifier--go-to-heading)
-            (ankifier--create-cloze))))
+	(save-excursion
+	  (save-restriction
+	    (widen)
+	    (ankifier--elsewhere-check)
+	    (ankifier--go-to-heading)
+	    (ankifier--create-cloze))))
     (message "Inserting in place")
     (ankifier--create-cloze))
 					; Feedback
@@ -234,7 +234,7 @@ Second ask the user if they want to ankify.
     ;; ask to ankify
     (let ((answer (read-char "ankify? (y/n): ")))
       (cond ((char-equal answer 121) (ankifier-create-from-region))
-            ((char-equal answer 110) (forward-sentence))))
+	    ((char-equal answer 110) (forward-sentence))))
     (deactivate-mark)))
 
 
@@ -246,7 +246,7 @@ Second ask the user if they want to ankify.
 Test if there's a cloze or basic question."
   (interactive)
   (let (
-        (region-text
+	(region-text
 	 (buffer-substring-no-properties (region-beginning) (region-end))))
     (let ((split-results (split-string region-text "\n\n"))) ; TODO optimize
       (dolist (item split-results)
@@ -270,7 +270,7 @@ Test if there's a cloze or basic question."
 (defun ankifier--split-region-all ()
   "Split REGION into paragraphs seperated by \\n\\n."
   (let (
-        (region-text (buffer-substring-no-properties (region-beginning) (region-end))))
+	(region-text (buffer-substring-no-properties (region-beginning) (region-end))))
     (setq ankifier--all-region-results (split-string region-text "\n\n")))
   (when ankifier-feedback
     (kill-region nil nil t))
@@ -279,7 +279,7 @@ Test if there's a cloze or basic question."
 (defun ankifier--split-region-basic ()
   "Split REGION into paragraphs seperated by \\n\\n."
   (let (
-        (region-text (buffer-substring-no-properties (region-beginning) (region-end))))
+	(region-text (buffer-substring-no-properties (region-beginning) (region-end))))
     (setq ankifier--basic-region-results (split-string region-text "\n\n")))
   (when ankifier-feedback
     (kill-region nil nil t))
@@ -289,7 +289,7 @@ Test if there's a cloze or basic question."
   "Split REGION into paragraphs seperated by \\n\\n.
 The results are stored in `ankifier--cloze-region-results'"
   (let (
-        (region-text (buffer-substring-no-properties (region-beginning) (region-end))))
+	(region-text (buffer-substring-no-properties (region-beginning) (region-end))))
     (setq ankifier--cloze-region-results (split-string region-text "\n\n")))
   (when ankifier-feedback
     (kill-region nil nil t))
@@ -301,7 +301,7 @@ Splits the list of strings created by `ankifier--split-region-cloze' and
 passes them to `ankifier--cloze-template' as parameters."
   (dolist (item ankifier--cloze-region-results)
     (let (
-          (cloze item))
+	  (cloze item))
       (ankifier--cloze-template cloze))))
 
 (defun ankifier--cloze-template (cloze)
@@ -310,21 +310,21 @@ passes them to `ankifier--cloze-template' as parameters."
   (insert "Cloze")
 					; Insert properties
   (insert "\n"
-          ":PROPERTIES:\n"
-          ":ANKI_DECK: " ankifier-anki-deck "\n"
-          ":ANKI_NOTE_TYPE: " ankifier-anki-cloze-note-type "\n"
-          ":ANKI_TAGS: " ankifier-anki-tags "\n"
-          ":END:")
+	  ":PROPERTIES:\n"
+	  ":ANKI_DECK: " ankifier-anki-deck "\n"
+	  ":ANKI_NOTE_TYPE: " ankifier-anki-cloze-note-type "\n"
+	  ":ANKI_TAGS: " ankifier-anki-tags "\n"
+	  ":END:")
   (org-insert-subheading nil)
   (insert "Text")
   (condition-case nil
       (if ankifier-context-question
-          ;; where the context split happens
-          ;; (split-string cloze ":")
-          (insert "\n" (car (split-string cloze ": "))
-                  "\n\n"
-                  (cadr (split-string cloze ": ")))
-        (insert "\n" cloze "?"))
+	  ;; where the context split happens
+	  ;; (split-string cloze ":")
+	  (insert "\n" (car (split-string cloze ": "))
+		  "\n\n"
+		  (cadr (split-string cloze ": ")))
+	(insert "\n" cloze "?"))
     (wrong-type-argument (message "Warning: `ankifier-context-question' is `t' but the question does not follow the form \"Context: Cloze\"")))
   (org-insert-heading nil)
   (insert "Back Extra")
@@ -338,8 +338,8 @@ Splits the list of strings created by `ankifier--split-region-basic' and
 passes them to `ankifier--basic-template' as parameters."
   (dolist (item ankifier--basic-region-results)
     (let (
-          (question (car (split-string item "[\?؟]")))
-          (answer (cadr (split-string item "[\?؟]"))))
+	  (question (car (split-string item "[\?؟]")))
+	  (answer (cadr (split-string item "[\?؟]"))))
       (ankifier--basic-template question answer))))
 
 (defun ankifier--basic-template (question answer)
@@ -363,7 +363,7 @@ passes them to `ankifier--basic-template' as parameters."
 	   "\n\n"
 	   (mapconcat 'identity  (cdr (split-string question ":")) ":")
 	   (if ankifier-arabic "؟"            ;; Whether or not the question
-					      ;; mark is Arabic
+	     ;; mark is Arabic
 	     "?"))
 	(insert "\n" question)
 	(if ankifier-arabic (insert "؟")
@@ -387,8 +387,8 @@ passes them to `ankifier--basic-template' as parameters."
   "Check if the heading * `ankifier-cards-heading' exists.
 If it does not, it creates it on a top level."
   (unless (save-excursion
-            (goto-char (point-min))
-            (search-forward (concat "* " ankifier-cards-heading) nil t))
+	    (goto-char (point-min))
+	    (search-forward (concat "* " ankifier-cards-heading) nil t))
 					; Code that runs when no heading exists
     (ankifier--create-cards-heading)))
 
