@@ -357,17 +357,15 @@ passes them to `ankifier--basic-template' as parameters."
   ;; Insert question
   (condition-case nil
       (if ankifier-context-question
-          ;; where the context split happens
-          ;; (split-string question ":")
-          (insert
-	   (car (split-string question ":"))  ;; The question's context
-           "\n\n"                             ;; Line break to have the context
-	                                      ;; display proper
-           (cadr (split-string question ":")) ;; The question body
+	  (insert
+	   (car (split-string question ":"))
+	   ;; Use a line break to separate context from question.
+	   "\n\n"
+	   (mapconcat 'identity  (cdr (split-string question ":")) ":")
 	   (if ankifier-arabic "؟"            ;; Whether or not the question
-	                                      ;; mark is Arabic
+					      ;; mark is Arabic
 	     "?"))
-        (insert "\n" question)
+	(insert "\n" question)
 	(if ankifier-arabic (insert "؟")
 	  (insert "?")))
     (wrong-type-argument
