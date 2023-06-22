@@ -115,7 +115,8 @@ into a special header whose name is determined by `ankifier-cards-heading'"
   :type '(boolean))
 
 (defcustom ankifier-arabic nil
-  "If set to t, insert basic questions with ؟ instead of ?.")
+  "If set to t, insert basic questions with ؟ instead of ?."
+  :type '(boolean))
 
 ;;;; Variables
 
