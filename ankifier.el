@@ -29,8 +29,10 @@
 
 ;;  Efficiently create Anki flashcards from your notes
 
-;;  This package extended anki-editor.el by Lei Tan, allowing notes written
-;;  in a special format to be converted into Basic and Cloze questions
+;;  This package extendes anki-editor.el by Lei Tan.  ankifier.el converts notes
+;;  written in a special format to Anki cards per the anki-editor.el format.
+;;  This does not send them to Anki, the user has to perform that by running
+;;  `anki-editor-push-tree'.
 
 ;;;; Installation
 
@@ -47,8 +49,9 @@
 
 ;;;; Usage
 
-;; Run one of these commands:
+;; Run one of these commands after creating an active region:
 
+;; `ankifier-create-from-region': Detect question type and use the appropriate format to create the cards.
 ;; `ankifier-create-basic-from-region': Create Basic question(s) from active region.
 ;; `ankifier-create-cloze-from-region': Create Cloze question(s) from active region.
 
