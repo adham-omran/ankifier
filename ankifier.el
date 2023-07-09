@@ -304,8 +304,7 @@ The results are stored in `ankifier--cloze-region-results'"
 Splits the list of strings created by `ankifier--split-region-cloze' and
 passes them to `ankifier--cloze-template' as parameters."
   (dolist (item ankifier--cloze-region-results)
-    (let (
-	  (cloze item))
+    (let ((cloze item))
       (ankifier--cloze-template cloze))))
 
 (defun ankifier--cloze-template (cloze)
@@ -323,11 +322,10 @@ passes them to `ankifier--cloze-template' as parameters."
   (insert "Text")
   (condition-case nil
       (if ankifier-context-question
-	  ;; where the context split happens
-	  ;; (split-string cloze ":")
-	  (insert "\n" (car (split-string cloze ": "))
+	  (insert "\n"
+		  (car (split-string cloze ":"))			     ;; insert context
 		  "\n\n"
-		  (cadr (split-string cloze ": ")))
+		  (mapconcat 'identity (cdr (split-string cloze ":")) ":"))  ;; insert question
 	(insert "\n" cloze "?"))
     (wrong-type-argument (message "Warning: `ankifier-context-question' is `t' but the question does not follow the form \"Context: Cloze\"")))
   (org-insert-heading nil)
