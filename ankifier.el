@@ -341,7 +341,10 @@ passes them to `ankifier--basic-template' as parameters."
   (dolist (item ankifier--basic-region-results)
     (let (
 	  (question (car (split-string item "[\?؟]")))
-	  (answer (cadr (split-string item "[\?؟]"))))
+	  (answer (string-join
+		   (cdr
+		    (split-string item "[\?؟]")) "?")))
+      ;; TODO This will break when the question mark in the answer is Arabic.
       (ankifier--basic-template question answer))))
 
 (defun ankifier--basic-template (question answer)
