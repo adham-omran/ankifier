@@ -2,11 +2,11 @@
 
 ;; Copyright (C) 2022 Adham Omran
 
-;; Author: Adham Omran <adham.rasoul@gmail.com>
-;; Maintainer: Adham Omran <adham.rasoul@gmail.com>
+;; Author: Adham Omran <contact@adham-omran.com>
+;; Maintainer: Adham Omran <contact@adham-omran.com>
 ;; Created: December 30, 2021
-;; Modified: July 9, 2023
-;; Version: 1.4.2
+;; Modified: August 25, 2024
+;; Version: 1.4.3-alpha
 ;; Homepage: https://github.com/adham-omran/ankifier
 ;; Package-Requires: ((emacs "27.2"))
 ;; Keywords: convenience
