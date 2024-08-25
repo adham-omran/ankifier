@@ -347,6 +347,9 @@ passes them to `ankifier--basic-template' as parameters."
       ;; TODO This will break when the question mark in the answer is Arabic.
       (ankifier--basic-template question answer))))
 
+(defun ankifier--prop-value-in-file (prop)
+  "Return the value for a property `PROP` value."
+  (car (cdr (car (org-collect-keywords (list prop))))))
 (defun ankifier--basic-template (question answer)
   "Insert QUESTION and ANSWER into the anki-editor template."
   (org-insert-subheading nil)
