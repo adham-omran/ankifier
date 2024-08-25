@@ -350,6 +350,29 @@ passes them to `ankifier--basic-template' as parameters."
 (defun ankifier--prop-value-in-file (prop)
   "Return the value for a property `PROP` value."
   (car (cdr (car (org-collect-keywords (list prop))))))
+(defun ankifier--insert-extra-fields ()
+  "Insert extra fields if any are defined."
+  (mapcar (lambda (arg)
+            (org-insert-heading)
+            (insert
+             ;; Field name.
+             (plist-get arg 'field-name)
+             "\n "
+             ;; Field value.
+             (cond
+              ((eq (plist-get arg 'source-type) 'file)
+               (ankifier--prop-value-in-file (plist-get arg 'source-name)))
+              ((eq (plist-get arg 'source-type) 'property)
+               "TODO")
+              (t "Value not found."))))
+          ankifier--extra-fields)
+
+  ;; '(( name "Source"
+  ;;     source file
+  ;;     value (org-collect-keywords (list prop))))
+
+  )
+
 (defun ankifier--basic-template (question answer)
   "Insert QUESTION and ANSWER into the anki-editor template."
   (org-insert-subheading nil)
