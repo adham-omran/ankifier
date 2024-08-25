@@ -402,9 +402,13 @@ passes them to `ankifier--basic-template' as parameters."
   ;; Insert the answer
   (org-insert-heading)
   (insert "Back" "\n" answer)
-  ;; Insert answer
+  ;; Insert additional fields if any.
+  (ankifier--insert-extra-fields)
+  ;; Go up
   (outline-up-heading 2)
-  (org-end-of-line))
+  (org-end-of-line)
+
+  )
 
 ;;; Go to pre-named heading
 (defun ankifier--go-to-heading ()
