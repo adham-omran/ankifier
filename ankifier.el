@@ -405,7 +405,8 @@ passes them to `ankifier--basic-template' as parameters."
   (org-insert-heading)
   (insert "Back" "\n" answer)
   ;; Insert additional fields if any.
-  (ankifier--insert-extra-fields)
+  (when (car ankifier--extra-fields)
+    (ankifier--insert-extra-fields))
   ;; Go up
   (outline-up-heading 2)
   (org-end-of-line)
@@ -440,3 +441,7 @@ If it does not, it creates it on a top level."
 (provide 'ankifier)
 
 ;;; ankifier.el ends here
+
+;; Local Variables:
+;; jinx-local-words: "cloze"
+;; End:
