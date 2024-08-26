@@ -134,6 +134,13 @@ into a special header whose name is determined by `ankifier-cards-heading'"
 (defvar ankifier--fail nil
   "Variable to determine if there are basic or cloze questions.")
 
+(defvar ankifier--extra-fields nil
+  "Variable to store extra fields and where to find them."
+  ;; '(( field-name "Source"
+  ;;     source-name "SOURCE_NAME"
+  ;;     source-type file ))
+  )
+
 ;;;; Functions
 
 ;;;;; Public
@@ -350,6 +357,7 @@ passes them to `ankifier--basic-template' as parameters."
 (defun ankifier--prop-value-in-file (prop)
   "Return the value for a property `PROP` value."
   (car (cdr (car (org-collect-keywords (list prop))))))
+
 (defun ankifier--insert-extra-fields ()
   "Insert extra fields if any are defined."
   (mapcar (lambda (arg)
@@ -365,13 +373,7 @@ passes them to `ankifier--basic-template' as parameters."
               ((eq (plist-get arg 'source-type) 'property)
                "TODO")
               (t "Value not found."))))
-          ankifier--extra-fields)
-
-  ;; '(( name "Source"
-  ;;     source file
-  ;;     value (org-collect-keywords (list prop))))
-
-  )
+          ankifier--extra-fields))
 
 (defun ankifier--basic-template (question answer)
   "Insert QUESTION and ANSWER into the anki-editor template."
