@@ -363,6 +363,7 @@ passes them to `ankifier--basic-template' as parameters."
 
 (defun ankifier--insert-extra-fields ()
   "Insert extra fields if any are defined."
+  (message "Extra: %s" ankifier--extra-fields)
   (mapcar (lambda (arg)
             (org-insert-heading)
             (insert
@@ -412,6 +413,7 @@ passes them to `ankifier--basic-template' as parameters."
   (insert "Back" "\n" answer)
   ;; Insert additional fields if any.
   (when (car ankifier--extra-fields)
+    (message "Found extra fields.")
     (ankifier--insert-extra-fields))
   ;; Go up
   (outline-up-heading 2)
