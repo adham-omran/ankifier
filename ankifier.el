@@ -358,6 +358,9 @@ passes them to `ankifier--basic-template' as parameters."
   "Return the value for a property `PROP` value."
   (car (cdr (car (org-collect-keywords (list prop))))))
 
+(setq ankifier--extra-fields
+      '(( field-name "Source" source-name "SOURCE_NAME" source-type file )))
+
 (defun ankifier--insert-extra-fields ()
   "Insert extra fields if any are defined."
   (mapcar (lambda (arg)
