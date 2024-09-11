@@ -339,6 +339,10 @@ passes them to `ankifier--cloze-template' as parameters."
     (wrong-type-argument (message "Warning: `ankifier-context-question' is `t' but the question does not follow the form \"Context: Cloze\"")))
   (org-insert-heading nil)
   (insert "Back Extra")
+  ;; Insert additional fields if any.
+  (when (car ankifier--extra-fields)
+    (message "Found extra fields.")
+    (ankifier--insert-extra-fields))
   (outline-up-heading 2)
   (org-end-of-line))
 
