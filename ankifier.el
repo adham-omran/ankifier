@@ -417,9 +417,7 @@ passes them to `ankifier--basic-template' as parameters."
     (ankifier--insert-extra-fields))
   ;; Go up
   (outline-up-heading 2)
-  (org-end-of-line)
-
-  )
+  (org-end-of-line))
 
 ;;; Go to pre-named heading
 (defun ankifier--go-to-heading ()
