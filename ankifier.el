@@ -376,7 +376,10 @@ passes them to `ankifier--basic-template' as parameters."
               ((eq (plist-get arg 'source-type) 'property)
                "TODO")
               (t "Value not found."))))
-          ankifier--extra-fields))
+          ;; ankifier--extra-fields
+          '(( field-name "Source"
+              source-name "SOURCE_NAME"
+              source-type file ))))
 
 (defun ankifier--basic-template (question answer)
   "Insert QUESTION and ANSWER into the anki-editor template."
