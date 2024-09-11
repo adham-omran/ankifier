@@ -5,7 +5,7 @@
 ;; Author: Adham Omran <contact@adham-omran.com>
 ;; Maintainer: Adham Omran <contact@adham-omran.com>
 ;; Created: December 30, 2021
-;; Modified: August 25, 2024
+;; Modified: September 11, 2024
 ;; Version: 1.4.3-alpha
 ;; Homepage: https://github.com/adham-omran/ankifier
 ;; Package-Requires: ((emacs "27.2"))
@@ -330,9 +330,11 @@ passes them to `ankifier--cloze-template' as parameters."
   (condition-case nil
       (if ankifier-context-question
           (insert "\n"
-                  (car (split-string cloze ":"))			     ;; insert context
+                  ;; Insert context
+                  (car (split-string cloze ":"))
                   "\n\n"
-                  (mapconcat 'identity (cdr (split-string cloze ":")) ":"))  ;; insert question
+                  ;; Insert question
+                  (mapconcat 'identity (cdr (split-string cloze ":")) ":"))
         (insert "\n" cloze "?"))
     (wrong-type-argument (message "Warning: `ankifier-context-question' is `t' but the question does not follow the form \"Context: Cloze\"")))
   (org-insert-heading nil)
