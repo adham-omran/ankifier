@@ -131,6 +131,32 @@ This is the config I'm using at the moment.
 + Check out [[https://yiufung.net/post/anki-org/][Power up Anki with Emacs, Org mode, anki-editor and more]] for ideas
   about general anki-editor use and how to get code highlighting working
   properly.
+** Custom Fields
+
+A custom field can be added with the flag TODO
+
+What if I want a number of fields? A list?
+
+Should the source be a variable? Or inferred from the buffer?
+Something like #+SOURCE_FIELD? Or a property? :SOURCE:?
+
+Maybe have a map structure where there are two keys
+- field-name
+  Anki template field name
+
+- field-source
+
+  Where to get the field's value, property or variable
+- field-value
+
+  Grab the value based on ~field-source~.
+*** How Should The User Add Fields?
+
+Per file? Per session?
+
+Mechanism?
+- ankifier-add-field?
+
 * Development
 ** Changelog
 :PROPERTIES:
