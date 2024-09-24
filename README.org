@@ -189,3 +189,5 @@ my first Emacs package!
 # org-export-with-properties: ()
 # org-export-with-title: t
 # End:
+* Tasks
+- [ ] Fix author on old commits
