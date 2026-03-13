@@ -149,12 +149,14 @@ Extra fields can be added to generated cards via the =ankifier--extra-fields=
 variable. It holds a list of plists, each with three keys:
 
 - =field-name= — The name of the field in your Anki note template (e.g. "Source").
-- =source-name= — The org file keyword to read the value from (e.g. "SOURCE_NAME",
-  read from a =#+SOURCE_NAME:= line in the org file).
-- =source-type= — How to retrieve the value. Currently supported: =file= (reads
-  from an org file keyword).
+- =source-name= — The keyword or property name to read the value from.
+- =source-type= — How to retrieve the value:
+  - =file= — reads from an org file keyword (e.g. =#+SOURCE_NAME: value=). All
+    cards in the file get the same value.
+  - =property= — reads from an org property drawer (e.g. =:SOURCE_NAME: value=).
+    Supports inheritance, so different headings can have different values.
 
-*** Example
+*** Example: File-level keyword
 
 Given this in your org file:
 #+begin_src org
@@ -168,6 +170,36 @@ And this configuration:
 #+end_src
 
 Each generated card will include a "Source" field with the value "Introduction to Algorithms".
+
+*** Example: Per-heading property
+
+Given this in your org file:
+#+begin_src org
+* Chapter 1
+:PROPERTIES:
+:SOURCE_NAME: Introduction to Algorithms, Ch. 1
+:END:
+
+What is an algorithm?
+A well-defined computational procedure.
+
+* Chapter 2
+:PROPERTIES:
+:SOURCE_NAME: Introduction to Algorithms, Ch. 2
+:END:
+
+What is insertion sort?
+A sorting algorithm that builds the sorted array one item at a time.
+#+end_src
+
+And this configuration:
+#+begin_src emacs-lisp
+(setq ankifier--extra-fields
+      '(( field-name "Source" source-name "SOURCE_NAME" source-type property )))
+#+end_src
+
+Cards created under "Chapter 1" will have =Source: Introduction to Algorithms, Ch. 1=,
+while cards under "Chapter 2" will have =Source: Introduction to Algorithms, Ch. 2=.
 
 * Development
 ** Changelog

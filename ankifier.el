@@ -134,6 +134,9 @@ into a special header whose name is determined by `ankifier-cards-heading'"
 (defvar ankifier--fail nil
   "Variable to determine if there are basic or cloze questions.")
 
+(defvar ankifier--extra-field-values nil
+  "Alist caching captured extra field values for the current card batch.")
+
 (defvar ankifier--extra-fields nil
   "Variable to store extra fields and where to find them."
   ;; '(( field-name "Source"
@@ -155,6 +158,9 @@ into a special header whose name is determined by `ankifier-cards-heading'"
   (if ankifier--fail
       (message "One or more paragraphs is malformed.")
 
+    ;; Capture extra field values while point is at source heading.
+    (when (car ankifier--extra-fields)
+      (ankifier--capture-extra-field-values))
     ;; Create a list containing all questions.
     (ankifier--split-region-all)
     ;; If the question contains a {{ then it's a cloze question
@@ -189,6 +195,8 @@ into a special header whose name is determined by `ankifier-cards-heading'"
 If t, go to * `ankifier-cards-heading' or create it then go to it
 else, create the basic question in-place."
   (interactive)
+  (when (car ankifier--extra-fields)
+    (ankifier--capture-extra-field-values))
   (ankifier--split-region-basic)
   (if ankifier-insert-elsewhere
       (progn
@@ -212,6 +220,8 @@ else, create the basic question in-place."
 If t, go to * `ankifier-cards-heading' or create it then go to it
 else, create the cloze question in-place."
   (interactive)
+  (when (car ankifier--extra-fields)
+    (ankifier--capture-extra-field-values))
   (ankifier--split-region-cloze)
   (if ankifier-insert-elsewhere
       (progn
@@ -364,29 +374,33 @@ passes them to `ankifier--basic-template' as parameters."
   "Return the value for a property `PROP` value."
   (car (cdr (car (org-collect-keywords (list prop))))))
 
-(setq ankifier--extra-fields
-      '(( field-name "Source" source-name "SOURCE_NAME" source-type file )))
+(defun ankifier--capture-extra-field-values ()
+  "Capture extra field values from the current heading context.
+Must be called while point is at the source heading, before navigation.
+Stores results in `ankifier--extra-field-values'."
+  (setq ankifier--extra-field-values nil)
+  (dolist (field ankifier--extra-fields)
+    (let* ((field-name (plist-get field 'field-name))
+           (source-name (plist-get field 'source-name))
+           (source-type (plist-get field 'source-type))
+           (value (cond
+                   ((eq source-type 'file)
+                    (ankifier--prop-value-in-file source-name))
+                   ((eq source-type 'property)
+                    (org-entry-get nil source-name t))
+                   (t nil))))
+      (when value
+        (push (cons field-name value) ankifier--extra-field-values)))))
 
 (defun ankifier--insert-extra-fields ()
-  "Insert extra fields if any are defined."
-  (message "Extra: %s" ankifier--extra-fields)
-  (mapcar (lambda (arg)
-            (org-insert-heading)
-            (insert
-             ;; Field name.
-             (plist-get arg 'field-name)
-             "\n "
-             ;; Field value.
-             (cond
-              ((eq (plist-get arg 'source-type) 'file)
-               (ankifier--prop-value-in-file (plist-get arg 'source-name)))
-              ((eq (plist-get arg 'source-type) 'property)
-               "TODO")
-              (t "Value not found."))))
-          ;; ankifier--extra-fields
-          '(( field-name "Source"
-              source-name "SOURCE_NAME"
-              source-type file ))))
+  "Insert extra fields if any are defined.
+Reads values from `ankifier--extra-field-values' cache."
+  (dolist (field ankifier--extra-fields)
+    (let* ((field-name (plist-get field 'field-name))
+           (value (cdr (assoc field-name ankifier--extra-field-values))))
+      (when value
+        (org-insert-heading)
+        (insert field-name "\n " value)))))
 
 (defun ankifier--basic-template (question answer)
   "Insert QUESTION and ANSWER into the anki-editor template."
