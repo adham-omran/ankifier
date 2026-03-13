@@ -31,6 +31,8 @@ utilizing the fantastic text editing of Emacs.
 :PROPERTIES:
 :TOC:      :depth 0
 :END:
+Requires Emacs 27.2+.
+
 Dependencies:
 + ~expand-region.el~ ([[https://github.com/magnars/expand-region.el][link]]).
 
@@ -65,6 +67,8 @@ Run one of these commands on an active region:
   region.
 + =ankifier-create-from-region=: Parse basic and cloze questions in the active
   region.
++ =ankifier-find-to-be-ankified=: Interactively search the buffer for
+  un-ankified questions and prompt to ankify them.
 
 Variables
 
@@ -85,7 +89,12 @@ Variables
 
 + =ankifier-anki-basic-note-type= sets the card type for basic cards.
 
++ =ankifier-anki-deck= sets the Anki deck to push cards to (default: "All").
 
++ =ankifier-anki-tags= sets the tags to apply to created cards (default: "").
+
++ Set =ankifier-arabic= to =t= to use Arabic question marks (؟) instead of
+  Latin (?).
 
 For a *basic* question, the questions must be separated by two newlines
 and have a single question mark to indicate the /Question/ part and the /Answer/
@@ -123,6 +132,9 @@ This is the config I'm using at the moment.
 (setq ankifier-insert-elsewhere t
       ankifier-anki-basic-note-type "E-Basic"
       ankifier-anki-cloze-note-type "E-Cloze"
+      ankifier-anki-deck "My Deck"
+      ankifier-anki-tags "study"
+      ankifier-arabic nil
       ankifier-feedback t
       ankifier-context-question t)
 #+end_src
@@ -133,29 +145,29 @@ This is the config I'm using at the moment.
   properly.
 ** Custom Fields
 
-A custom field can be added with the flag TODO
+Extra fields can be added to generated cards via the =ankifier--extra-fields=
+variable. It holds a list of plists, each with three keys:
 
-What if I want a number of fields? A list?
+- =field-name= — The name of the field in your Anki note template (e.g. "Source").
+- =source-name= — The org file keyword to read the value from (e.g. "SOURCE_NAME",
+  read from a =#+SOURCE_NAME:= line in the org file).
+- =source-type= — How to retrieve the value. Currently supported: =file= (reads
+  from an org file keyword).
 
-Should the source be a variable? Or inferred from the buffer?
-Something like #+SOURCE_FIELD? Or a property? :SOURCE:?
+*** Example
 
-Maybe have a map structure where there are two keys
-- field-name
-  Anki template field name
+Given this in your org file:
+#+begin_src org
+#+SOURCE_NAME: Introduction to Algorithms
+#+end_src
 
-- field-source
+And this configuration:
+#+begin_src emacs-lisp
+(setq ankifier--extra-fields
+      '(( field-name "Source" source-name "SOURCE_NAME" source-type file )))
+#+end_src
 
-  Where to get the field's value, property or variable
-- field-value
-
-  Grab the value based on ~field-source~.
-*** How Should The User Add Fields?
-
-Per file? Per session?
-
-Mechanism?
-- ankifier-add-field?
+Each generated card will include a "Source" field with the value "Introduction to Algorithms".
 
 * Development
 ** Changelog
